@@ -108,6 +108,12 @@ signs:
     artifacts: all
     output: true
 
+release:
+  header: |
+    ## {{ .TagSubject }} ({{ .Date }})
+
+    {{ .TagBody }}
+
 changelog:
   sort: asc
   filters:
