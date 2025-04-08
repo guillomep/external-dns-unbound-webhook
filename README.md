@@ -12,7 +12,7 @@ Unbound domains inside your kubernetes cluster with [ExternalDNS](https://github
 To use ExternalDNS with Unbound, you need to enable remote control on your
 Unbound instance. Check out the [Unbound documentation]() for more information.
 For detailed technical instructions on how the Unbound webhook is deployed using the Official Helm chart for ExternalDNS,
-see[deployment instructions](#kubernetes-deployment).
+see [deployment instructions](#kubernetes-deployment).
 
 ## Kubernetes Deployment
 
