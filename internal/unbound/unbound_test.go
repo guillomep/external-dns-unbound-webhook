@@ -3,7 +3,7 @@ package unbound
 import (
 	"context"
 	"github.com/codingconcepts/env"
-	unboundlib "github.com/guillaumep/go-unbound/unbound"
+	unboundlib "github.com/guillomep/go-unbound"
 	"github.com/stretchr/testify/assert"
 	"sigs.k8s.io/external-dns/endpoint"
 	"sigs.k8s.io/external-dns/plan"

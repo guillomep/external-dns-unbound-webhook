@@ -3,7 +3,7 @@ package unbound
 import (
 	"context"
 	"fmt"
-	unboundlib "github.com/guillaumep/go-unbound/unbound"
+	unboundlib "github.com/guillomep/go-unbound"
 	log "github.com/sirupsen/logrus"
 	"regexp"
 	"sigs.k8s.io/external-dns/endpoint"
