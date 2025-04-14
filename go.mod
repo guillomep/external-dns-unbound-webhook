@@ -8,7 +8,7 @@ require (
 	github.com/google/go-licenses v1.6.0
 	github.com/guillomep/go-unbound v0.1.0
 	github.com/sirupsen/logrus v1.9.3
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	gotest.tools/gotestsum v1.12.0
 	sigs.k8s.io/external-dns v0.15.0
 )
