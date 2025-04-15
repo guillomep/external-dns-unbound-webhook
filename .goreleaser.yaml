@@ -13,12 +13,14 @@ before:
   hooks:
     - scripts/release_precheck.sh
 
+env:
+  - REGISTRY=ghcr.io/guillomep
+  - IMAGE_NAME=external-dns-unbound-webhook
+
 builds:
   - main: ./cmd/webhook
     env:
       - CGO_ENABLED=0
-      - REGISTRY=ghcr.io/guillomep
-      - IMAGE_NAME=external-dns-unbound-webhook
     goos:
       - linux
       - windows
