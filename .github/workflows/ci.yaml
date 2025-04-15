@@ -51,6 +51,7 @@ jobs:
           path: ./build/reports/**-test.xml
           reporter: java-junit
           fail-on-error: 'true'
+          use-actions-summary: 'false'
       - name: Upload Reports
         if: always()
         uses: actions/upload-artifact@v4
