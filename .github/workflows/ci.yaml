@@ -58,6 +58,6 @@ jobs:
           name: unit-test-reports
           path: ./build/reports/**
       - name: Go Coverage Badge  # Pass the `coverage.out` output to this action
-        uses: tj-actions/coverage-badge-go@v2
+        uses: tj-actions/coverage-badge-go@v3
         with:
           filename: ./build/reports/unit-test-coverage.out
