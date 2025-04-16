@@ -301,7 +301,7 @@ func TestApplyChange(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			m := mockClient{records: tt.records}
 			p := &UnboundProvider{
-				client: &m,
+				client:     &m,
 				defaultTTL: 7200,
 			}
 
