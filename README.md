@@ -63,13 +63,13 @@ provider:
     livenessProbe:
       httpGet:
         path: /health
-        port: http-wh-metrics
+        port: http-webhook
       initialDelaySeconds: 10
       timeoutSeconds: 5
     readinessProbe:
       httpGet:
         path: /ready
-        port: http-wh-metrics
+        port: http-webhook
       initialDelaySeconds: 10
       timeoutSeconds: 5
     extraVolumeMounts:
@@ -83,6 +83,8 @@ extraVolumes:
 extraArgs:
   - "--txt-prefix=reg-%{record_type}-"
 ```
+
+Replace `<UNBOUND_HOST>` with the real value (e.g. `tcp://192.168.1.1:8953`).
 
 And then:
 
