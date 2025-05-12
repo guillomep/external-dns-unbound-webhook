@@ -11,7 +11,7 @@ require (
 	github.com/guillomep/go-unbound v0.1.1
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.10.0
-	gotest.tools/gotestsum v1.12.1
+	gotest.tools/gotestsum v1.12.2
 	sigs.k8s.io/external-dns v0.16.1
 )
 
