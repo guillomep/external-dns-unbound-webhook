@@ -153,3 +153,16 @@ consideration:
 
 The basic development tasks are provided by make. Run `make help` to see the
 available targets.
+
+## Contributing
+
+This work is based on the [Vultr webhook implementation](https://github.com/vultr/external-dns-vultr-webhook/tree/main).
+
+You can help this project by giving time to fill issues or creating pull requests, or if you don't have time you can always buy me a coffee.
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/guillomep)
+
+*BTC*: bc1q8c0q9u5qczxrmj9wx6ukg7a2cnxhea5xs4rav9
+
+*LTC*: ltc1qdudg5ralpptu7clr0ruklfmr06vlgl8vdzp0fj
+
