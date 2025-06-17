@@ -6,7 +6,7 @@ require (
 	github.com/codingconcepts/env v0.0.0-20240618133406-5b0845441187
 	github.com/golangci/golangci-lint v1.64.8
 	github.com/google/go-licenses v1.6.0
-	github.com/guillomep/go-unbound v0.1.2
+	github.com/guillomep/go-unbound v0.2.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.10.0
 	gotest.tools/gotestsum v1.12.2
