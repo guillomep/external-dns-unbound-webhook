@@ -1,17 +1,14 @@
 name: CI
 
 on:
-  push:
+  pull_request:
     branches:
       - '**'
+  push:
+    branches-ignore:
+      - 'dependabot/**'
     tags-ignore:
       - '**'
-
-permissions:
-  contents: read
-  actions: read
-  checks: write
-  id-token: write
 
 jobs:
   build:
@@ -19,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        go-version: [ '1.23.x' ]
+        go-version: [ '1.24.x' ]
 
     steps:
       - uses: actions/checkout@v4
@@ -43,17 +40,8 @@ jobs:
           distribution: goreleaser
           version: ~> v2
           args: release --snapshot --clean --skip=publish
-      - name: Test Report
-        uses: dorny/test-reporter@v2
-        if: success() || failure()
-        with:
-          name: Unit Test Results
-          path: ./build/reports/**-test.xml
-          reporter: java-junit
-          fail-on-error: 'true'
-          use-actions-summary: 'false'
       - name: Upload Reports
-        if: always()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: unit-test-reports

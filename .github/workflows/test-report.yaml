@@ -1,0 +1,24 @@
+name: 'Test Report'
+on:
+  workflow_run:
+    workflows: ['CI']                     # runs after CI workflow
+    types:
+      - completed
+permissions:
+  contents: read
+  actions: read
+  checks: write
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Test Report
+      uses: dorny/test-reporter@v2
+      with:
+        artifact: unit-test-reports
+        name: Unit Test Results
+        path: '**-test.xml'
+        reporter: java-junit
+        fail-on-error: 'true'
+        use-actions-summary: 'false'
+
