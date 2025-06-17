@@ -24,8 +24,6 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go-version }}
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@v3.8.2
       - name: Install dependencies
         run: go mod tidy
       - name: Build
@@ -39,7 +37,7 @@ jobs:
         with:
           distribution: goreleaser
           version: ~> v2
-          args: release --snapshot --clean --skip=publish
+          args: release --snapshot --clean --skip=publish,sign
       - name: Upload Reports
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
