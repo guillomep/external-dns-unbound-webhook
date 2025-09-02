@@ -21,7 +21,7 @@ type UnboundProvider struct {
 	provider.BaseProvider
 	client unboundlib.Client
 
-	domainFilter endpoint.DomainFilter
+	domainFilter *endpoint.DomainFilter
 	dryRun       bool
 	defaultTTL   int
 }
@@ -166,8 +166,8 @@ func (p *UnboundProvider) AdjustEndpoints(endpoints []*endpoint.Endpoint) ([]*en
 	return adjustedEndpoints, nil
 }
 
-func GetDomainFilter(config Configuration) endpoint.DomainFilter {
-	var domainFilter endpoint.DomainFilter
+func GetDomainFilter(config Configuration) *endpoint.DomainFilter {
+	var domainFilter *endpoint.DomainFilter
 	createMsg := "Creating Unbound provider with "
 
 	if config.RegexDomainFilter != "" {
