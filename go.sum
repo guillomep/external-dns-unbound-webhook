@@ -384,8 +384,8 @@ github.com/gostaticanalysis/testutil v0.3.1-0.20210208050101-bfb5c8eec0e4/go.mod
 github.com/gostaticanalysis/testutil v0.5.0 h1:Dq4wT1DdTwTGCQQv3rl3IvD5Ld0E6HiY+3Zh0sUGqw8=
 github.com/gostaticanalysis/testutil v0.5.0/go.mod h1:OLQSbuM6zw2EvCcXTz1lVq5unyoNft372msDY0nY5Hs=
 github.com/grpc-ecosystem/grpc-gateway v1.16.0/go.mod h1:BDjrQk3hbvj6Nolgz8mAMFbcEtjT1g+wF4CSlocrBnw=
-github.com/guillomep/go-unbound v0.2.0 h1:HpcRUDdJ8W9hR3uV5kjOu1lSA7Jb3C0d7YvBPFymMu0=
-github.com/guillomep/go-unbound v0.2.0/go.mod h1:QCv07N5SlNHsOF43MM+KcCGLKLmH3xknCm3zma+fsbU=
+github.com/guillomep/go-unbound v0.2.1 h1:aqFFAWk5Gm/bHmmrzvJZ8BGr3tjDpFoGWXNumjmL3OY=
+github.com/guillomep/go-unbound v0.2.1/go.mod h1:BwBd6rg2rWDqPJNBP0HC2qmCZkt5KYik/EazZkvN3wg=
 github.com/hashicorp/go-immutable-radix/v2 v2.1.0 h1:CUW5RYIcysz+D3B+l1mDeXrQ7fUvGGCwJfdASSzbrfo=
 github.com/hashicorp/go-immutable-radix/v2 v2.1.0/go.mod h1:hgdqLXA4f6NIjRVisM1TJ9aOJVNRqKZj+xDGF6m7PBw=
 github.com/hashicorp/go-uuid v1.0.3 h1:2gKiV6YVmrJ1i2CKKa9obLvRieoRGviZFL26PcT/Co8=
