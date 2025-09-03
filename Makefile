@@ -98,14 +98,14 @@ release-check: ## Check if the release will work
 
 .PHONY: license-check
 license-check: ## Run go-licenses check against code.
-	go install github.com/google/go-licenses
+	go install github.com/google/go-licenses@1.6.0
 	mkdir -p build/reports
 	echo "$(LICENCES_IGNORE_LIST)"
 	$(GOPATH)/bin/go-licenses check --include_tests --ignore "$(LICENCES_IGNORE_LIST)" ./...
 
 .PHONY: license-report
 license-report: ## Create licenses report against code.
-	go install github.com/google/go-licenses
+	go install github.com/google/go-licenses@v21.6.0
 	mkdir -p build/reports/licenses
 	$(GOPATH)/bin/go-licenses report --include_tests --ignore "$(LICENCES_IGNORE_LIST)" ./... >build/reports/licenses/licenses-list.csv
 	cat licences/licenses-manual-list.csv >> build/reports/licenses/licenses-list.csv
