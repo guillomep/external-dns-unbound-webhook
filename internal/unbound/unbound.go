@@ -48,8 +48,8 @@ type Configuration struct {
 func NewProvider(config *Configuration) (*UnboundProvider, error) {
 	unboundClient, err := unboundlib.NewClient(config.Host,
 		unboundlib.WithServerCertificatesFile(config.CaPemPath),
-		unboundlib.WithControlCertificatesFile(config.KeyPemPath),
-		unboundlib.WithControlPrivateKeyFile(config.CertPemPath))
+		unboundlib.WithControlPrivateKeyFile(config.KeyPemPath),
+		unboundlib.WithControlCertificatesFile(config.CertPemPath))
 	if err != nil {
 		return nil, err
 	}
