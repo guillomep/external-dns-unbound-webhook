@@ -1,6 +1,6 @@
 module github.com/guillomep/external-dns-unbound-webhook
 
-go 1.24.2
+go 1.25.4
 
 require (
 	github.com/codingconcepts/env v0.0.0-20240618133406-5b0845441187
