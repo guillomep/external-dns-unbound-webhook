@@ -42,7 +42,7 @@ jobs:
           args: release --snapshot --clean --skip=publish,sign
       - name: Upload Reports
         if: ${{ !cancelled() }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: unit-test-reports
           path: ./build/reports/**
