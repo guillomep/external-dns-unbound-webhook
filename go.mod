@@ -5,7 +5,7 @@ go 1.25.4
 require (
 	github.com/codingconcepts/env v0.0.0-20240618133406-5b0845441187
 	github.com/golangci/golangci-lint v1.64.8
-	github.com/guillomep/go-unbound v0.2.1
+	github.com/guillomep/go-unbound v0.2.2
 	github.com/sirupsen/logrus v1.9.4
 	github.com/stretchr/testify v1.11.1
 	gotest.tools/gotestsum v1.13.0
@@ -215,8 +215,6 @@ require (
 	golang.org/x/text v0.31.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
 	golang.org/x/tools v0.38.0 // indirect
-	golang.org/x/tools/go/expect v0.1.1-deprecated // indirect
-	golang.org/x/tools/go/packages/packagestest v0.1.1-deprecated // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.13.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
