@@ -102,11 +102,11 @@ checksum:
 
 signs:
   - cmd: cosign
-    certificate: "${artifact}.pem"
+    signature: "${artifact}.sigstore.json"
     args:
       - sign-blob
       - --yes
-      - "--output-certificate=${certificate}"
+      - "--new-bundle-format=true"
       - "--bundle=${signature}"
       - "${artifact}"
     artifacts: all
