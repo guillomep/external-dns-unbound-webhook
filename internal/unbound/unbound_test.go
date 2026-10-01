@@ -2,12 +2,15 @@ package unbound
 
 import (
 	"context"
+	"errors"
 	"github.com/codingconcepts/env"
 	unboundlib "github.com/guillomep/go-unbound"
 	"github.com/stretchr/testify/assert"
+	"net"
 	"sigs.k8s.io/external-dns/endpoint"
 	"sigs.k8s.io/external-dns/plan"
 	"testing"
+	"time"
 )
 
 // Compile time check for interface conformance
@@ -48,6 +51,7 @@ func TestConfigurationDefault(t *testing.T) {
 	assert.Empty(t, config.CertPemPath)
 	assert.False(t, config.DryRun)
 	assert.Equal(t, 300, config.DefaultTTL)
+	assert.Equal(t, 3*time.Second, config.Timeout)
 	assert.Empty(t, config.DomainFilter)
 	assert.Empty(t, config.ExcludeDomains)
 	assert.Empty(t, config.RegexDomainFilter)
@@ -358,4 +362,87 @@ func TestAdjustEndpoints(t *testing.T) {
 	result, err := p.AdjustEndpoints(input)
 	assert.Nil(t, err)
 	assert.Equal(t, expected, result)
+}
+
+// blockingClient simulates an Unbound server that never answers.
+type blockingClient struct {
+	release chan struct{}
+}
+
+func (b *blockingClient) LocalData() []unboundlib.RR {
+	<-b.release
+	return nil
+}
+
+func (b *blockingClient) AddLocalData(rr unboundlib.RR) error {
+	<-b.release
+	return nil
+}
+
+func (b *blockingClient) RemoveLocalData(rr unboundlib.RR) error {
+	<-b.release
+	return nil
+}
+
+func TestRecordsTimeout(t *testing.T) {
+	c := &blockingClient{release: make(chan struct{})}
+	defer close(c.release)
+
+	p := &UnboundProvider{
+		client:       c,
+		host:         "tcp://192.0.2.1:953",
+		timeout:      50 * time.Millisecond,
+		probe:        func() error { return errors.New("i/o timeout") },
+		domainFilter: GetDomainFilter(Configuration{}),
+	}
+
+	start := time.Now()
+	_, err := p.Records(context.Background())
+	assert.ErrorContains(t, err, "got no answer within 50ms: i/o timeout")
+	assert.Less(t, time.Since(start), time.Second)
+}
+
+func TestApplyChangesTimeout(t *testing.T) {
+	c := &blockingClient{release: make(chan struct{})}
+	defer close(c.release)
+
+	p := &UnboundProvider{
+		client:       c,
+		host:         "tcp://192.0.2.1:953",
+		timeout:      50 * time.Millisecond,
+		probe:        func() error { return nil },
+		domainFilter: GetDomainFilter(Configuration{}),
+	}
+
+	err := p.ApplyChanges(context.Background(), &plan.Changes{
+		Create: []*endpoint.Endpoint{endpoint.NewEndpoint("a.lan.", "A", "192.168.1.1")},
+	})
+	assert.ErrorContains(t, err, "local_data")
+	assert.ErrorContains(t, err, "TLS handshake or the response stalled")
+}
+
+func TestRecordsEmptyUnreachable(t *testing.T) {
+	p := &UnboundProvider{
+		client:       &mockClient{},
+		host:         "tcp://192.0.2.1:953",
+		timeout:      time.Second,
+		probe:        func() error { return errors.New("connection refused") },
+		domainFilter: GetDomainFilter(Configuration{}),
+	}
+
+	_, err := p.Records(context.Background())
+	assert.ErrorContains(t, err, "connection refused")
+}
+
+func TestCheckReachable(t *testing.T) {
+	l, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Fatal(err)
+	}
+	addr := l.Addr().String()
+
+	assert.NoError(t, checkReachable("tcp://"+addr, time.Second))
+
+	_ = l.Close()
+	assert.Error(t, checkReachable("tcp://"+addr, time.Second))
 }
