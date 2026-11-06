@@ -23,6 +23,11 @@ func loop(status *server.HealthStatus) {
 }
 
 func main() {
+	// LOG_LEVEL accepts any logrus level (debug, info, warn, ...).
+	if level, err := log.ParseLevel(os.Getenv("LOG_LEVEL")); err == nil {
+		log.SetLevel(level)
+	}
+
 	// Read server options
 	serverOptions := &server.ServerOptions{}
 	if err := env.Set(serverOptions); err != nil {
@@ -50,12 +55,13 @@ func main() {
 	// Start the webhook
 	log.Infof("Starting webhook server on %s", serverOptions.GetWebhookAddress())
 	startedChan := make(chan struct{})
-	go api.StartHTTPApi(
-		provider, startedChan,
-		serverOptions.GetReadTimeout(),
-		serverOptions.GetWriteTimeout(),
-		serverOptions.GetWebhookAddress(),
-	)
+	go api.StartHTTPApi(api.ServerOptions{
+		Provider:     provider,
+		StartedChan:  startedChan,
+		ReadTimeout:  serverOptions.GetReadTimeout(),
+		WriteTimeout: serverOptions.GetWriteTimeout(),
+		ProviderPort: serverOptions.GetWebhookAddress(),
+	})
 
 	// Wait for the HTTP server to start and then set the healthy and ready flags
 	<-startedChan

@@ -100,17 +100,19 @@ The following environment variables are available:
 | Variable                | Description                                       | Notes                      |
 | ----------------------- | ------------------------------------------------- | -------------------------- |
 | UNBOUND_HOST            | Unbound host (with port) to control               | Mandatory                  |
-| UNBOUND_CA_PEM_PATH     | Server certificate use by Unbound                 | Default: ``                |
-| UNBOUND_CLIENT_PEM_PATH | Client certificate use to authenticate to Unbound | Default: ``                |
-| UNBOUND_KEY_PEM_PATH    | Server certificate use to authenticate to Unbound | Default: ``                |
+| UNBOUND_CA_PEM_PATH     | Server certificate used by Unbound                | Default: ``                |
+| UNBOUND_CERT_PEM_PATH   | Client certificate to authenticate to Unbound     | Default: ``                |
+| UNBOUND_KEY_PEM_PATH    | Client private key to authenticate to Unbound     | Default: ``                |
+| UNBOUND_TIMEOUT         | Time limit for each call to Unbound (0 = none)    | Default: `3s`              |
 | DRY_RUN                 | If set, changes won't be applied                  | Default: `false`           |
-| DEFAULT_TTL             | Default TTL if not specified                      | Default: `7200`            |
+| DEFAULT_TTL             | Default TTL if not specified                      | Default: `300`             |
 | WEBHOOK_HOST            | Webhook hostname or IP address                    | Default: `localhost`       |
 | WEBHOOK_PORT            | Webhook port                                      | Default: `8888`            |
 | HEALTH_HOST             | Liveness and readiness hostname                   | Default: `0.0.0.0`         |
 | HEALTH_PORT             | Liveness and readiness port                       | Default: `8080`            |
 | READ_TIMEOUT            | Servers' read timeout in ms                       | Default: `60000`           |
 | WRITE_TIMEOUT           | Servers' write timeout in ms                      | Default: `60000`           |
+| LOG_LEVEL               | Log level (`debug`, `info`, `warn`, `error`)      | Default: `info`            |
 
 Additional environment variables for domain filtering:
 
